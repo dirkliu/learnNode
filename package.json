@@ -1,0 +1,22 @@
+{
+  "name": "learn-node",
+  "version": "1.0.0",
+  "description": "A project of learn node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webTechMutual/learnNode.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Jason 7",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webTechMutual/learnNode/issues"
+  },
+  "homepage": "https://github.com/webTechMutual/learnNode#readme"
+}
