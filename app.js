@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const path = require('path');
+const routes = require('routes');
 
 http.createServer((req, res) => {
    var pathname = url.parse(req.url).pathname;
@@ -15,7 +16,7 @@ http.createServer((req, res) => {
         }
 
         switch (fileType) {
-          case 'html':
+          case 'html':0
           case 'htm':
             res.writeHead(200, {"Content-Type": "text/html;charset:utf-8"});
             break;
