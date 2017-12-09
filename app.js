@@ -8,15 +8,10 @@ http.createServer((req, res) => {
    var pathname = url.parse(req.url).pathname;
    var fileType=pathname.split('.').pop()
 
-   if(pathname.indexOf('/download/' > -1)) {
-     console.log('pathname:', pathname)
-     // res.set({
-     //   'Content-type': 'application/octet-stream',
-     //   'Content-Disposition': 'attachment;filename=download.text'
-     // })
-     // res.setHeader('Content-type', 'application/octet-stream');
-     // res.setHeader('Content-Disposition', 'attachment;filename=download.text');
-     // fs.createReadStream(path.join(__dirname, 'README.md')).pipe(res)
+   if(pathname.indexOf('/download/') > -1) {
+     res.setHeader('Content-type', 'application/octet-stream');
+     res.setHeader('Content-Disposition', 'attachment;filename=download.text');
+     fs.createReadStream(path.join(__dirname, 'README.md')).pipe(res)
 
    } else {
      fs.readFile(path.join(__dirname, pathname), function (err, file) {
@@ -37,6 +32,7 @@ http.createServer((req, res) => {
           }
           res.end(file);
       });
-      console.log('Static server is running! ROOT:', __dirname);
    }
+
+   console.log('Node server is running! ROOT:', __dirname);
  }).listen(80)
