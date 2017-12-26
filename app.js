@@ -14,6 +14,12 @@ http.createServer((req, res) => {
      fs.createReadStream(path.join(__dirname, 'README.md')).pipe(res)
 
    } else {
+     // var options = {};
+     // if (['html', 'txt', 'htm', 'json'].indexOf(fileType) > -1) {
+     //    options.encoding = 'utf8'
+     // }
+     // console.log('options:', options)
+     // console.log('fileType:', fileType)
      fs.readFile(path.join(__dirname, pathname), function (err, file) {
           if (err) {
               res.writeHead(404, {"Content-Type": "text/html;charset:utf-8"});
