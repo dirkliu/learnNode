@@ -4,41 +4,40 @@ const fs = require('fs');
 const path = require('path');
 const routes = require('./routes');
 
+// http.createServer((req, res) => {
+//   res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
+//   var stream = fs.createReadStream('./home.html')
+//   let body = ''
+//   stream.on('data', chunk => {
+//     body += chunk
+//     console.log('chunk:', chunk)
+//   })
+//   stream.on('end', () => {
+//     res.write(body)
+//     res.end()
+//   })
+//  }).listen(80)
+
 http.createServer((req, res) => {
-   var pathname = url.parse(req.url).pathname;
-   var fileType=pathname.split('.').pop()
-
-   if(pathname.indexOf('/download/') > -1) {
-     res.setHeader('Content-type', 'application/octet-stream');
-     res.setHeader('Content-Disposition', 'attachment;filename=download.text');
-     fs.createReadStream(path.join(__dirname, 'README.md')).pipe(res)
-
-   } else {
-     // var options = {};
-     // if (['html', 'txt', 'htm', 'json'].indexOf(fileType) > -1) {
-     //    options.encoding = 'utf8'
-     // }
-     // console.log('options:', options)
-     // console.log('fileType:', fileType)
-     fs.readFile(path.join(__dirname, pathname), function (err, file) {
-          if (err) {
-              res.writeHead(404, {"Content-Type": "text/html;charset:utf-8"});
-              res.end('404,Not found!');
-              return;
-          }
-
-          switch (fileType) {
-            case 'html':
-            case 'htm':
-              res.writeHead(200, {"Content-Type": "text/html;charset:utf-8"});
-              break;
-            case 'txt':
-              res.writeHead(200, {"Content-Type": "text/plain;charset:utf-8"});
-              break;
-          }
-          res.end(file);
+  let pathname = url.parse(req.url).pathname;
+  let fileType=pathname.split('.').pop()
+  console.log('pathname:', pathname)
+  switch (fileType) {
+    case 'html':
+    case 'htm':
+      res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
+      break;
+    case 'txt':
+      res.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
+    case 'png':
+      res.writeHead(200, {
+        "Content-Type": "image/png",
+        "Cache-Control": "max-age=3000000"
       });
-   }
-
-   console.log('Node server is running! ROOT:', __dirname);
+    break;
+  }
+  //var stream = fs.createReadStream('./home.html')
+  fs.readFile(path.join(__dirname, pathname), (err, file) => {
+    res.end(file)
+  })
  }).listen(80)
