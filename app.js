@@ -26,18 +26,23 @@ http.createServer((req, res) => {
     case 'html':
     case 'htm':
       res.writeHead(200, {"Content-Type": "text/html;charset=utf-8"});
-      break;
+      break
     case 'txt':
       res.writeHead(200, {"Content-Type": "text/plain;charset=utf-8"});
     case 'png':
       res.writeHead(200, {
         "Content-Type": "image/png",
         "Cache-Control": "max-age=3000000"
-      });
-    break;
+      })
+      break
+    case 'css':
+      res.writeHead(200, {
+        "Coontent-Type": "text/css;charset=utf-8"
+      })
+      break
   }
   //var stream = fs.createReadStream('./home.html')
   fs.readFile(path.join(__dirname, pathname), (err, file) => {
     res.end(file)
   })
- }).listen(80)
+ }).listen(8765)
