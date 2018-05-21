@@ -40,6 +40,11 @@ http.createServer((req, res) => {
         "Coontent-Type": "text/css;charset=utf-8"
       })
       break
+    case 'js':
+      res.writeHead(200, {
+        "Content_Type": "application/x-javascript;charset=utf-8"
+      })
+      break
   }
   //var stream = fs.createReadStream('./home.html')
   fs.readFile(path.join(__dirname, pathname), (err, file) => {
